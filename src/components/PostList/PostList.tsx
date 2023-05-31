@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Card, Input, Space, Spin } from 'antd'
+import { Card, Input, Space, Spin, Tooltip } from 'antd'
+import classNames from 'classnames'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 
 import { togglePost, selectPosts } from './postsSlice'
 import { getPosts, getUsers } from './api'
+import classes from './PostList.module.css'
 
 export const PostList: React.FC = () => {
   const { loading, error, posts, users, selectedPostId } = useAppSelector(selectPosts)
@@ -18,7 +20,7 @@ export const PostList: React.FC = () => {
         .filter(
           ({ userName, userId, body }) =>
             userName?.toLowerCase().includes(searchValue) ||
-            String(userId).toLowerCase().includes(searchValue) ||
+            String(userId).includes(searchValue) ||
             body?.toLowerCase().includes(searchValue)
         ),
     [posts, users, searchValue]
@@ -39,15 +41,19 @@ export const PostList: React.FC = () => {
     <>
       <Input placeholder="Search" value={searchValue} onChange={({ target: { value } }) => handleSearch(value)} />
       <Spin spinning={loading}>
-        <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '20px' }}>
+        <Space direction="vertical" size="middle" className={classes.list}>
           {normalizedPosts.map(({ id, title, body, userName }) => (
             <Card
               hoverable
               onClick={() => dispatch(togglePost(selectedPostId === id ? undefined : id))}
               key={id}
-              title={title}
+              title={
+                <Tooltip title={title} placement="topLeft">
+                  {title}
+                </Tooltip>
+              }
               extra={userName}
-              style={{ background: selectedPostId === id ? '#dae3f2' : 'white' }}
+              className={classNames({ [classes.active]: selectedPostId === id })}
             >
               <p>{body}</p>
             </Card>

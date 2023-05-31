@@ -7,6 +7,8 @@ import { addTag, selectTags } from './tagsSlice'
 import { addCommentTag } from '../../commentsSlice'
 import { Comment, Tag as TagType } from '../../../../types'
 
+import classes from './TagList.module.css'
+
 type TagListProps = SelectProps & {
   commentId: Comment['id']
   commentTags: TagType[]
@@ -45,6 +47,7 @@ export const TagList: React.FC<TagListProps> = ({ commentTags, commentId }) => {
         <Select
           autoFocus
           size="small"
+          className={classes.select}
           showSearch
           value={name}
           onSearch={handleChange}
@@ -53,7 +56,7 @@ export const TagList: React.FC<TagListProps> = ({ commentTags, commentId }) => {
           options={tags.map(({ name }) => ({ label: name, value: name }))}
         />
       ) : (
-        <Tag onClick={() => setIsSelectVisible(true)} style={{ borderStyle: 'dashed' }}>
+        <Tag onClick={() => setIsSelectVisible(true)} className={classes.blankTag}>
           <PlusOutlined /> New Tag
         </Tag>
       )}
