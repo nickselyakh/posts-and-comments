@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { PostList, Comments } from './components'
+import { Layout } from 'antd'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const { Content, Sider } = Layout
 
-export default App;
+const App = () => (
+  <Layout hasSider>
+    <Sider
+      width={300}
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        padding: '20px',
+        left: 0,
+        top: 0,
+        bottom: 0,
+      }}
+      theme="light"
+    >
+      <PostList />
+    </Sider>
+    <Layout className="site-layout" style={{ marginLeft: 300 }}>
+      <Content style={{ margin: '24px 16px 0', height: '100vh', overflow: 'auto' }}>
+        <Comments />
+      </Content>
+    </Layout>
+  </Layout>
+)
+
+export default App
