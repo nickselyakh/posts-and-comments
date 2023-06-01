@@ -5,8 +5,8 @@ import { DownOutlined } from '@ant-design/icons'
 import { Comment as CommentType, Reply, Tag } from '../../../types'
 import { reply } from '../commentsSlice'
 import { useAppDispatch } from '../../../app/hooks'
+import { TagList } from '../../TagList'
 
-import { TagList } from './TagList/TagList'
 import classes from './Comment.module.css'
 
 const { Text } = Typography
@@ -42,7 +42,7 @@ export const Comment: React.FC<CommentProps> = ({ name, text, id, commentId, rep
       <Space direction="vertical">
         <Space direction="horizontal">
           <Text strong>{name}</Text>
-          {id === commentId && <TagList commentTags={tags} commentId={commentId} />}
+          {id === commentId && <TagList ownTags={tags} commentId={commentId} />}
         </Space>
         <Text>{text}</Text>
         <Button type="text" className={classes.replyControl} size="small" onClick={() => setReplyFieldVisible(true)}>

@@ -26,7 +26,7 @@ describe('Comments reducer', () => {
   })
 
   it('Should handle addCommentTag', () => {
-    const actual = commentsReducer(initialState, addCommentTag({ ...tag, commentId: comment.id }))
-    expect(actual.comments[0]).toEqual({ ...comment, tags: [{ ...tag, commentId: comment.id }] })
+    const actual = commentsReducer(initialState, addCommentTag({ tag, commentId: comment.id }))
+    expect(actual.comments[0]).toEqual({ ...comment, tags: [tag] })
   })
 })

@@ -19,9 +19,9 @@ export const commentsSlice = createSlice({
         payload.commentId === comment.id ? { ...comment, replies: [...(comment.replies || []), payload] } : comment
       )
     },
-    addCommentTag: (state, { payload }: PayloadAction<Tag & { commentId: Comment['id'] }>) => {
+    addCommentTag: (state, { payload }: PayloadAction<{ tag: Tag; commentId: Comment['id'] }>) => {
       state.comments = state.comments.map((comment) =>
-        payload.commentId === comment.id ? { ...comment, tags: [...(comment.tags || []), payload] } : comment
+        payload.commentId === comment.id ? { ...comment, tags: [...(comment.tags || []), payload.tag] } : comment
       )
     },
   },

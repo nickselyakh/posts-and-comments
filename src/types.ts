@@ -15,6 +15,10 @@ export type Tag = {
   name: string
 }
 
+/**
+ * We don't have replies and tags in DB,
+ * so it will be stored locally
+ */
 export type Comment = {
   postId: number
   id: number

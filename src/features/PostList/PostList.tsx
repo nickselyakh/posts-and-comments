@@ -8,6 +8,12 @@ import { togglePost, selectPosts } from './postsSlice'
 import { getPosts, getUsers } from './api'
 import classes from './PostList.module.css'
 
+/**
+ * @description Provides PostList component with the opportunity
+ * to search by username, userId and post content.
+ * Note: In the real life we can use infinite scroll here,
+ * as posts length can be big enough
+ */
 export const PostList: React.FC = () => {
   const { loading, error, posts, users, selectedPostId } = useAppSelector(selectPosts)
   const dispatch = useAppDispatch()
@@ -19,9 +25,9 @@ export const PostList: React.FC = () => {
         .map((post) => ({ ...post, userName: users[post.userId] }))
         .filter(
           ({ userName, userId, body }) =>
-            userName?.toLowerCase().includes(searchValue) ||
+            userName.toLowerCase().includes(searchValue) ||
             String(userId).includes(searchValue) ||
-            body?.toLowerCase().includes(searchValue)
+            body.toLowerCase().includes(searchValue)
         ),
     [posts, users, searchValue]
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostList, Comments } from './components'
+import { PostList, Comments } from './features'
 import { Layout } from 'antd'
 
 import classes from './App.module.css'

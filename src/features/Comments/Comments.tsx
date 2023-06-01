@@ -11,6 +11,10 @@ import classes from './Comments.module.css'
 
 const { Title } = Typography
 
+/**
+ * @description Displays Comments list with the opportunity to reply,
+ * expand/collapse nested replies and add new tag to the root comment
+ */
 export const Comments: React.FC = () => {
   const { loading, error, comments } = useAppSelector(selectComments)
   const { selectedPostId } = useAppSelector(selectPosts)

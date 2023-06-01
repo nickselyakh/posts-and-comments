@@ -5,3 +5,8 @@
 .blankTag {
   border-style: dashed;
 }
+
+.placeholder {
+  font-size: 12px;
+  color: gray;
+}

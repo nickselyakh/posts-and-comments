@@ -10,6 +10,10 @@ export const getPosts = createAsyncThunk('posts/getPosts', async () => {
   return data
 })
 
+/**
+ * As we need users only for getting user name,
+ * it's better to store it like dictinory for easy access
+ */
 export const getUsers = createAsyncThunk('posts/getUsers', async () => {
   const { data } = await axios.get<User[]>(API_ROUTES.USERS)
 

@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import { TagList } from '../TagList'
-import { store } from '../../../../../app/store'
+import { store } from '../../../app/store'
 
 describe('TagList', () => {
   const commentId = 1
