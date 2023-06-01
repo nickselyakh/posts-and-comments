@@ -5,14 +5,16 @@ import { DownOutlined } from '@ant-design/icons'
 import { Comment as CommentType, Reply, Tag } from '../../../types'
 import { reply } from '../commentsSlice'
 import { useAppDispatch } from '../../../app/hooks'
-import { TagList } from './TagList/TagList'
+import { TagList } from '../../TagList'
+
+import classes from './Comment.module.css'
 
 const { Text } = Typography
 
-type CommentProps = {
+export type CommentProps = {
   name: CommentType['name']
   text: CommentType['body']
-  id: CommentType['id']
+  id: number
   commentId: CommentType['id']
   replies?: Reply[]
   tags?: Tag[]
@@ -31,31 +33,28 @@ export const Comment: React.FC<CommentProps> = ({ name, text, id, commentId, rep
     if (replyBody) {
       dispatch(reply({ id: Math.random(), body: replyBody, name: 'Your name', commentId }))
     }
+    setReplyBody('')
     setReplyFieldVisible(false)
   }
 
   return (
-    <div style={{ marginTop: 30 }}>
-      <div>
-        <Space direction="vertical">
-          <Space direction="horizontal">
-            <Text strong>{name}</Text>
-            {id === commentId && <TagList commentTags={tags} commentId={commentId} />}
-          </Space>
-          <Text>{text}</Text>
-          <Space>
-            <Button type="primary" size="small" onClick={() => setReplyFieldVisible(true)}>
-              Reply
-            </Button>
-          </Space>
+    <div className={classes.container}>
+      <Space direction="vertical">
+        <Space direction="horizontal">
+          <Text strong>{name}</Text>
+          {id === commentId && <TagList ownTags={tags} commentId={commentId} />}
         </Space>
-      </div>
+        <Text>{text}</Text>
+        <Button type="text" className={classes.replyControl} size="small" onClick={() => setReplyFieldVisible(true)}>
+          Reply
+        </Button>
+      </Space>
 
       {replyFieldVisible && (
         <Input
           placeholder="Enter your reply"
           value={replyBody}
-          style={{ marginTop: '10px', width: 300 }}
+          className={classes.field}
           autoFocus
           onPressEnter={handleReply}
           onBlur={handleReply}
@@ -63,8 +62,8 @@ export const Comment: React.FC<CommentProps> = ({ name, text, id, commentId, rep
         />
       )}
 
-      <div style={{ marginLeft: 30 }}>
-        {(replies || []).map((reply) => (
+      <div className={classes.replies}>
+        {replies.map((reply) => (
           <Comment key={reply.id} id={reply.id} name={reply.name} text={reply.body} commentId={commentId} />
         ))}
         {rawReplies?.length > 1 && (

@@ -1,0 +1,21 @@
+.container {
+  margin-top: 30px;
+  border-bottom: 2px solid #fafafa;
+  padding: 20px;
+  background: white;
+}
+
+.field {
+  width: 300;
+  display: block;
+  margin-top: 10px;
+}
+
+.replyControl span {
+  color: gray;
+  font-size: 12px;
+}
+
+.replies {
+  margin-left: 40px;
+}
