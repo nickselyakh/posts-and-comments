@@ -1,6 +1,8 @@
 import { CommentsState, Comment, Reply as ReplyType, Tag } from '../../../types'
 import commentsReducer, { reply, addCommentTag } from '../commentsSlice'
 
+jest.mock('axios')
+
 describe('Comments reducer', () => {
   const tag: Tag = { name: 'tag' }
   const comment: Comment = { postId: 1, id: 1, name: 'comment', email: 'email', body: 'comment body' }
