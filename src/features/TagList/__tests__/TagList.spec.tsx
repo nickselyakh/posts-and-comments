@@ -13,7 +13,7 @@ describe('TagList', () => {
   test('Renders the existing comment tags successfully', () => {
     const { container } = render(
       <Provider store={store}>
-        <TagList commentTags={commentTags} commentId={commentId} />
+        <TagList ownTags={commentTags} commentId={commentId} />
       </Provider>
     )
 
@@ -23,7 +23,7 @@ describe('TagList', () => {
   test('Opens creating dropdown', () => {
     render(
       <Provider store={store}>
-        <TagList commentTags={commentTags} commentId={commentId} />
+        <TagList ownTags={commentTags} commentId={commentId} />
       </Provider>
     )
 
@@ -36,7 +36,7 @@ describe('TagList', () => {
   test('Adds a new comment tag', () => {
     render(
       <Provider store={store}>
-        <TagList commentTags={commentTags} commentId={commentId} />
+        <TagList ownTags={commentTags} commentId={commentId} />
       </Provider>
     )
     const newTagButton = screen.getByText(/New Tag/i)
