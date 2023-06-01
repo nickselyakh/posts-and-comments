@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { PlusOutlined } from '@ant-design/icons'
 import { Tag, Select } from 'antd'
 
@@ -27,6 +27,14 @@ export const TagList: React.FC<TagListProps> = ({ ownTags, commentId }) => {
   const dispatch = useAppDispatch()
   const [isSelectVisible, setIsSelectVisible] = useState(false)
   const [name, setName] = useState('')
+
+  const normalizedOptions = useMemo(
+    () =>
+      tags
+        .filter(({ name }) => !ownTags.map(({ name: ownName }) => ownName).includes(name))
+        .map(({ name }) => ({ label: name, value: name })),
+    [tags, ownTags]
+  )
 
   const handleAddTag = () => {
     if (name) {
@@ -65,7 +73,7 @@ export const TagList: React.FC<TagListProps> = ({ ownTags, commentId }) => {
           onSearch={handleChange}
           onChange={handleChange}
           onBlur={handleAddTag}
-          options={tags.map(({ name }) => ({ label: name, value: name }))}
+          options={normalizedOptions}
         />
       ) : (
         <Tag onClick={() => setIsSelectVisible(true)} className={classes.blankTag}>

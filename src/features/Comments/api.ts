@@ -9,12 +9,3 @@ export const getComments = createAsyncThunk('comments/getComments', async (postI
 
   return data
 })
-
-export const addComment = createAsyncThunk(
-  'comments/addComment',
-  async (payload: { title: string; body: string; userId: number }) => {
-    const { data } = await axios.post<Comment>(API_ROUTES.COMMENTS, payload)
-
-    return data
-  }
-)
