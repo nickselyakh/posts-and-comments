@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { Comment, CommentsState, Reply, Tag } from '../../types'
 import { RootState } from '../../app/store'
-import { getComments, addComment } from './api'
+
+import { getComments } from './api'
 
 const initialState: CommentsState = {
   comments: [],
@@ -38,21 +39,6 @@ export const commentsSlice = createSlice({
         state.comments = action.payload
       })
       .addCase(getComments.rejected, (state) => {
-        state.loading = false
-        state.error = 'Failed to fetch!'
-        state.comments = []
-      })
-      .addCase(addComment.pending, (state) => {
-        state.loading = true
-        state.error = null
-        state.comments = []
-      })
-      .addCase(addComment.fulfilled, (state, action: PayloadAction<Comment>) => {
-        state.loading = false
-        state.error = null
-        state.comments.push(action.payload)
-      })
-      .addCase(addComment.rejected, (state) => {
         state.loading = false
         state.error = 'Failed to fetch!'
         state.comments = []

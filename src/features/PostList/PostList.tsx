@@ -25,9 +25,9 @@ export const PostList: React.FC = () => {
         .map((post) => ({ ...post, userName: users[post.userId] }))
         .filter(
           ({ userName, userId, body }) =>
-            userName.toLowerCase().includes(searchValue) ||
+            userName?.toLowerCase().includes(searchValue) ||
             String(userId).includes(searchValue) ||
-            body.toLowerCase().includes(searchValue)
+            body?.toLowerCase().includes(searchValue)
         ),
     [posts, users, searchValue]
   )
